@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F1A4F5D9-1BFB-422F-AF59-1119ECB40DBA}</ProjectGuid>
+    <RootNamespace>CudaRenderer</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.2.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\int\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\int\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;WIN64;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      $(ProjectDir)src;
+      $(SolutionDir)..\..\libs\Astro\include;
+      $(SolutionDir)..\..\libs\Graphics\include;
+      $(SolutionDir)..\..\libs\Trace\include;
+      $(SolutionDir)..\..\libs\AccelerationStructures\include;
+      $(SolutionDir)..\..\dependencies;
+      $(SolutionDir)..\..\dependencies\glew\include;
+      $(SolutionDir)..\..\dependencies\glfw\include;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\include;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\cuda;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build\include;
+      %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>true</MinimalRebuild>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>cudart_static.lib;glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\dependencies\glew\lib\Release\X64;$(SolutionDir)..\..\dependencies\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;MSVCRT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <NvccCompilation>compile</NvccCompilation>
+      <CudaRuntime>Static</CudaRuntime>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <CompileOut>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\%(Filename)%(Extension).obj</CompileOut>
+      <CodeGeneration>compute_89,sm_89</CodeGeneration>
+      <CodeGeneration>compute_89,sm_89</CodeGeneration>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;WIN64;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)..\..\libs\Astro\include;$(SolutionDir)..\..\dependencies\glew\include;$(SolutionDir)..\..\dependencies\glfw\include;$(SolutionDir)..\..\libs\Graphics\include;$(SolutionDir)..\..\libs\Trace\include;$(SolutionDir)..\..\libs\AccelerationStructures\include;$(SolutionDir)..\..\dependencies;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\include;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\cuda;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MinimalRebuild>true</MinimalRebuild>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>cudart_static.lib;glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\dependencies\glew\lib\Release\X64;$(SolutionDir)..\..\dependencies\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <GenerateLineInfo>false</GenerateLineInfo>
+      <PtxAsOptionV>false</PtxAsOptionV>
+      <NvccCompilation>compile</NvccCompilation>
+      <CudaRuntime>Static</CudaRuntime>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <CompileOut>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\%(Filename)%(Extension).obj</CompileOut>
+      <CodeGeneration>compute_89,sm_89</CodeGeneration>
+      <SplitCompile>MaxThreads</SplitCompile>
+      <FastMath>true</FastMath>
+      <Optimization>O3</Optimization>
+      <Warning>W0</Warning>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CudaCompile Include="src\Application.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\core\CelestialBody.h" />
+    <ClInclude Include="src\core\celestial\Background.cuh" />
+    <ClInclude Include="src\core\celestial\CelestialBody.cuh" />
+    <ClInclude Include="src\core\celestial\Earth.cuh" />
+    <ClInclude Include="src\core\celestial\EarthMoon.h" />
+    <ClInclude Include="src\core\celestial\Sun.cuh" />
+    <ClInclude Include="src\core\SpaceEnvironment.cuh" />
+    <ClInclude Include="src\objects\SphereSoA.cuh" />
+    <ClInclude Include="src\raytracing\materials\Material.cuh" />
+    <ClInclude Include="src\raytracing\objects\Environment.cuh" />
+    <ClInclude Include="src\raytracing\objects\Sphere.cuh" />
+    <ClInclude Include="src\raytracing\objects\SphereSoA.cuh" />
+    <ClInclude Include="src\raytracing\utils\Ray.cuh" />
+    <ClInclude Include="src\raytracing\utils\Camera.cuh" />
+    <ClInclude Include="src\raytracing\utils\Record.cuh" />
+    <ClInclude Include="src\utils\CameraController.cuh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\AccelerationStructures\AccelerationStructures.vcxproj">
+      <Project>{3089f41d-b21e-4261-a506-4c669df89ff9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libs\Graphics\Graphics.vcxproj">
+      <Project>{7c5b1bc9-1532-4053-8bf7-52bef9463321}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libs\Trace\Trace.vcxproj">
+      <Project>{553882f6-2bce-4882-880f-d5fa1b910345}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.2.targets" />
+  </ImportGroup>
+</Project>
