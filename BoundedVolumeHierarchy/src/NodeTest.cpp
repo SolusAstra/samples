@@ -11,7 +11,7 @@
 
 #define PLOT_SIM 1
 #define PRINT_SIM 0
-#define INPUT_FORMAT 1
+#define INPUT_FORMAT 0
 
 #include "bvh_util.h"
 #include "Particle.h"
@@ -59,11 +59,22 @@ void dynamicTransparencyUpdateOfDepth(BVH<T>* bvh, std::vector<float>& transpare
 void updateVerticesOfBox(int boxIdx, sf::VertexArray& sfWireframe, const std::vector<float2>& wireframeVertices);
 void updateTransparencyOfBox(int boxIdx, sf::VertexArray& sfWireframe, const float transparency);
 
+
+
+
+
+
 int main() {
 	const int width = 800;
 	const int height = 800;
 
-	const int nP = 200000;
+	const int nP = 10;
+
+
+    // vertices, indices
+
+
+
 
 	// Initialize vertices
 	std::vector<floatN> vertices(nP);

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
@@ -14,8 +14,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1A43DD9B-B44F-40BA-888E-50CD189A4A53}</ProjectGuid>
-    <RootNamespace>simpleRayTracing</RootNamespace>
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{892cebb4-92aa-490c-afee-722538f2458f}</ProjectGuid>
+    <RootNamespace>AcceleratedRayTracing</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -54,12 +56,38 @@
     <IntDir>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\int\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)..\..\libs\Graphics\include;$(SolutionDir)..\..\libs\Trace\include;$(SolutionDir)..\..\dependencies;$(SolutionDir)..\..\dependencies\glew\include;$(SolutionDir)..\..\dependencies\glfw\include;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\include;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\cuda;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      $(ProjectDir)src;
+      $(SolutionDir)..\..\libs\Graphics\include;
+      $(SolutionDir)..\..\libs\Trace\include;
+      $(SolutionDir)..\..\libs\AccelerationStructures\include;
+      $(SolutionDir)..\..\dependencies;
+      $(SolutionDir)..\..\dependencies\glew\include;
+      $(SolutionDir)..\..\dependencies\glfw\include;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\include;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\cuda;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build\include;
+      %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>true</MinimalRebuild>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -79,8 +107,6 @@
       <CompileOut>$(SolutionDir)..\..\bin\$(Configuration)-$(Platform)\$(ProjectName)\%(Filename)%(Extension).obj</CompileOut>
       <CodeGeneration>compute_89,sm_89</CodeGeneration>
       <CodeGeneration>%(CodeGeneration)</CodeGeneration>
-      <PtxAsOptionV>true</PtxAsOptionV>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -91,7 +117,21 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)..\..\libs\Graphics\include;$(SolutionDir)..\..\libs\Trace\include;$(SolutionDir)..\..\dependencies;$(SolutionDir)..\..\dependencies\glew\include;$(SolutionDir)..\..\dependencies\glfw\include;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\include;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\cuda;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build;C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      $(ProjectDir)src;
+      $(SolutionDir)..\..\libs\Graphics\include;
+      $(SolutionDir)..\..\libs\Trace\include;
+      $(SolutionDir)..\..\libs\AccelerationStructures\include;
+      $(SolutionDir)..\..\dependencies;
+      $(SolutionDir)..\..\dependencies\glew\include;
+      $(SolutionDir)..\..\dependencies\glfw\include;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\include;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\cuda;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build;
+      C:\ProgramData\NVIDIA Corporation\OptiX SDK 7.7.0\SDK\build\include;
+      %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MinimalRebuild>true</MinimalRebuild>
@@ -122,21 +162,28 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="raytracing_kernals.h" />
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\premade.h" />
+    <ClInclude Include="src\Background.cuh" />
+    <ClInclude Include="src\CameraController.cuh" />
     <ClInclude Include="src\raytracing_kernals.h" />
     <ClInclude Include="src\SceneConstruction_kernals.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\libs\AccelerationStructures\AccelerationStructures.vcxproj">
+      <Project>{3089f41d-b21e-4261-a506-4c669df89ff9}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\libs\Graphics\Graphics.vcxproj">
       <Project>{7c5b1bc9-1532-4053-8bf7-52bef9463321}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\libs\Trace\Trace.vcxproj">
-      <Project>{553882f6-2bce-4882-880f-d5fa1b910345}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="src\Application.cu" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="src\Application.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="raytracing_kernals.cu" />
     <CudaCompile Include="src\raytracing_kernals.cu" />
     <CudaCompile Include="src\SceneConstruction_kernals.cu" />
   </ItemGroup>

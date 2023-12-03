@@ -98,15 +98,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\NodeTest.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\libs\AccelerationStructures\AccelerationStructures.vcxproj">
       <Project>{3089f41d-b21e-4261-a506-4c669df89ff9}</Project>
     </ProjectReference>
     <ProjectReference Include="..\AccelerationStructures.vcxproj">
       <Project>{3089f41d-b21e-4261-a506-4c669df89ff9}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\app-utils\bvhPlot.h" />
+    <ClInclude Include="src\app-utils\MatrixTypes.h" />
+    <ClInclude Include="src\app-utils\plot.h" />
+    <ClInclude Include="src\app-utils\time.h" />
+    <ClInclude Include="src\scene\Camera.h" />
+    <ClInclude Include="src\scene\premade.h" />
+    <ClInclude Include="src\scene\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\TrianglePrimitives.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

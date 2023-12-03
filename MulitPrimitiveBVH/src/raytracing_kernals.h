@@ -15,12 +15,13 @@ namespace Trace {
 
 
     __global__ void execute_k(
-        float3* pixelBuffer,
-        int width,
-        int height,
+        float3* pixelBuffer, 
+        int width, 
+        int height, 
         int nSamples,
-        Trace::Environment* env,
+        int SEED_CONSTANT,
         Trace::Camera camera,
+        Trace::PrimitiveArray** environment,
         curandState* rand);
 
     extern "C" void execute(const Trace::Pipeline& pipeline, float3* pixelBuffer);

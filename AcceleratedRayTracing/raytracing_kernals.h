@@ -19,14 +19,15 @@ namespace Trace {
         int width,
         int height,
         int nSamples,
-        Trace::Environment* env,
+        int SEED_CONSTANT,
         Trace::Camera camera,
+        Trace::PrimitiveArray** environment,
         curandState* rand);
 
-    extern "C" void execute(const Trace::Pipeline& pipeline, float3* pixelBuffer);
+    extern "C" void execute(const Trace::Pipeline & pipeline, float3 * pixelBuffer);
 
 
     __global__ void initRandomState_k(curandState* rand, int width, int height, int SEED_CONSTANT);
-    extern "C" void initRandomState(Trace::Pipeline& pipeline, int SEED_CONSTANT);
+    extern "C" void initRandomState(Trace::Pipeline & pipeline, int SEED_CONSTANT);
 
 };

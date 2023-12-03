@@ -30,7 +30,7 @@ public:
 
     OpenGL::Window window;
     LayerStack layerStack;
-    
+
 public:
 
     Application(ApplicationConfig app_config) : config(app_config),
@@ -43,7 +43,23 @@ public:
 
     int run();
 
-    void update(Layer& layer, int nSamples);
+    void update(Layer& layer, int nSamples) {
+
+        timer.tick();
+        timer.accumulateFrameTime();
+        if (timer.getMultiframeTime() < 1.0f / 60.0f) {
+            return;
+        }
+
+        // Render to screen
+        layer.update();
+        computeFPS(nSamples);
+
+        // Swap buffers and poll events
+        window.swapBuffers();
+        window.processInput();
+        timer.resetMultiframeTime();
+    }
 
     void update() {
 

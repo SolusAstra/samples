@@ -15,6 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <CudaCompile Include="src\raytracing_kernals.cu" />
+    <CudaCompile Include="src\SceneConstruction_kernals.cu" />
+    <CudaCompile Include="raytracing_kernals.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="src\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -26,14 +39,11 @@
     <ClInclude Include="src\SceneConstruction_kernals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CudaCompile Include="src\raytracing_kernals.cu" />
-    <CudaCompile Include="src\SceneConstruction_kernals.cu" />
+    <ClInclude Include="Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing_kernals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

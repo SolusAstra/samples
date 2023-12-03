@@ -1,26 +1,18 @@
 #pragma once
+#include "Pipeline.h"
+#include "env\Primitive.h"
 
-// CUDA utilities and system includes
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
 #include <helper_cuda.h>
-
-
-#include "env\Primitive.h"
-#include "Pipeline.h"
+#include <curand_kernel.h>
 
 enum SceneType {
-    FLAT_WORLD = 0,
-    CORNELL_BOX = 1,
-    CORNELL_BOX2 = 2,
-    COMPLEX_SCENE = 3,
-    BACKROOM = 4,
-    BUNNY = 5,
-    SPHERES = 6,
-    FINAL_SCENE = 7
+    RANDOM = 0,
+    BUNNY = 1,
+    EXEMPLAR = 2,
+    CORNELL = 3
 };
 
-__global__ void initScene(Trace::PrimitiveArray** env, Trace::Primitive** objects);
-__global__ void setUpPrimitiveArray_k(Trace::PrimitiveArray** d_environment, Trace::Primitive** objects);
-
-extern "C" void setUpPrimitiveArray(SceneType sceneType, Trace::Pipeline & pipeline);
+__global__ void buildEnvironment_k(Trace::dPrimitive* primitive, Trace::Material* material);
+extern "C" void buildEnvironment(SceneType sceneType, Trace::Pipeline & pipeline);
